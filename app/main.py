@@ -70,7 +70,7 @@ async def auto_news_generator():
     while True:
         if auto_update_enabled:
             try:
-                news_list, newest_time = get_latest_news(latest_news_time)
+                news_list, newest_time = await get_latest_news(latest_news_time)
                 if news_list:
                     latest_news_time = newest_time
                     for title, content in news_list:
