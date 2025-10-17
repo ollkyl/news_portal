@@ -12,7 +12,7 @@
 ## Установка и запуск
 
 1. Установите зависимости:
-```bash
+
 pip install -r requirements.txt
 
 Запустите приложение:
@@ -27,10 +27,9 @@ docker build -t news-portal .
 docker run -p 8000:8000 news-portal
 ```
 
-Откройте в браузере:
+
 
 Главная страница: http://localhost:8000
-
 Панель администратора: http://localhost:8000/admin
 
 ## Использование
@@ -48,6 +47,7 @@ Jinja2 - HTML шаблоны
 RSS парсинг - агрегация новостей
 
 Список источников(app/parser.py): 
+```bash
     rss_feeds = [
         "https://feeds.bbci.co.uk/news/rss.xml",
         "https://feeds.npr.org/1001/rss.xml",
@@ -75,3 +75,4 @@ RSS парсинг - агрегация новостей
         "https://www.theguardian.com/international/rss",
         "https://time.com/feed/",
     ]
+```
