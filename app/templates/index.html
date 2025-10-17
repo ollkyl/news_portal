@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>News Portal</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .news { margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1> News Portal</h1>
+
+  <div id="news-list">
+    {% for n in news %}
+      <div class="news">
+        <h3>{{ n.title }}</h3>
+        <p>{{ n.content }}</p>
+        <small>{{ n.created_at }}</small>
+      </div>
+    {% endfor %}
+  </div>
+
+  <script>
+    const ws = new WebSocket(`ws://${location.host}/ws/news`);
+    
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      const div = document.createElement('div');
+      div.classList.add('news');
+      div.innerHTML = `<h3>${data.title}</h3><p>${data.content}</p><small>${new Date().toLocaleString()}</small>`;
+      document.getElementById('news-list').prepend(div);
+    };
+  </script>
+</body>
+</html>

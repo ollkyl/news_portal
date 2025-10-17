@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow p-6">
+        <h1 class="text-2xl font-bold mb-6">Admin Panel</h1>
+        
+        <div class="mb-6">
+            <button id="toggleBtn" class="{% if auto_update_enabled %}bg-green-500{% else %}bg-gray-300{% endif %} w-16 h-8 rounded-full relative transition-colors">
+                <span class="absolute top-1 left-1 bg-white w-6 h-6 rounded-full transition-transform {% if auto_update_enabled %}translate-x-8{% else %}translate-x-0{% endif %}"></span>
+            </button>
+            <span class="ml-3">Auto Update: <span id="statusText">{% if auto_update_enabled %}ON{% else %}OFF{% endif %}</span></span>
+        </div>
+
+        <div class="mb-4">
+            <input type="text" id="newsTitle" placeholder="News Title" class="w-full p-2 border rounded mb-2">
+            <textarea id="newsContent" placeholder="News Content" class="w-full p-2 border rounded mb-2"></textarea>
+            <button onclick="addNews()" class="bg-blue-500 text-white px-4 py-2 rounded">Add News</button>
+        </div>
+
+        <div id="message" class="mt-4 text-green-600"></div>
+    </div>
+
+    <script>
+        document.getElementById('toggleBtn').addEventListener('click', function() {
+            fetch('/admin', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({toggle_auto: true})
+            })
+            .then(r => r.json())
+            .then(data => {
+                const btn = document.getElementById('toggleBtn');
+                const statusText = document.getElementById('statusText');
+                const dot = btn.querySelector('span');
+                
+                if (data.enabled) {
+                    btn.classList.remove('bg-gray-300');
+                    btn.classList.add('bg-green-500');
+                    dot.classList.add('translate-x-8');
+                    statusText.textContent = 'ON';
+                } else {
+                    btn.classList.remove('bg-green-500');
+                    btn.classList.add('bg-gray-300');
+                    dot.classList.remove('translate-x-8');
+                    statusText.textContent = 'OFF';
+                }
+            });
+        });
+
+        function addNews() {
+            const title = document.getElementById('newsTitle').value;
+            const content = document.getElementById('newsContent').value;
+            
+            fetch('/admin', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({title, content})
+            })
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('message').textContent = 'News added!';
+                document.getElementById('newsTitle').value = '';
+                document.getElementById('newsContent').value = '';
+            });
+        }
+    </script>
+</body>
+</html>
