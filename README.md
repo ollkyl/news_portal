@@ -41,6 +41,8 @@ docker build -t news-portal .
 docker run -p 8000:8000 news-portal
 ```
 
+<img width="915" height="940" alt="image" src="https://github.com/user-attachments/assets/2b6a74f4-1b09-4675-9fdf-f671aea995f0" />
+<img width="552" height="327" alt="image" src="https://github.com/user-attachments/assets/5be76a57-5a10-404c-99e5-83cccf4a6c19" />
 
 
 ## Использование
@@ -48,6 +50,8 @@ docker run -p 8000:8000 news-portal
 - Главная страница — просмотр всех новостей
 - Панель администратора — включение/выключение авто-обновления, ручное добавление новостей
 
+<img width="1830" height="1879" alt="image" src="https://github.com/user-attachments/assets/2b6a74f4-1b09-4675-9fdf-f671aea995f0" />
+<img width="1103" height="654" alt="image" src="https://github.com/user-attachments/assets/5be76a57-5a10-404c-99e5-83cccf4a6c19" />
 
 ## Список источников (app/parser.py)
 
