@@ -38,20 +38,15 @@ async def get_latest_news(since: datetime):
     for feed_url in rss_feeds:
         try:
             feed = feedparser.parse(feed_url)
-
             for entry in feed.entries:
                 if hasattr(entry, "published_parsed"):
                     entry_date = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
-
                     if entry_date > since_utc:
                         title = entry.title[:100]
                         content = f"{entry.title}\n\nRead more: {entry.link}"
                         all_news.append((title, content, entry_date))
-
                         if entry_date > newest_time:
                             newest_time = entry_date
-
         except Exception:
             continue
-
     return [(title, content) for title, content, date in all_news], newest_time

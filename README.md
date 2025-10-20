@@ -1,5 +1,7 @@
 # News Portal
 
+Веб-приложение на **FastAPI**, которое автоматически парсит новости из RSS-лент и отображает их в реальном времени.
+
 ## Возможности
 
 - Автоматический парсинг новостей из RSS-лент
@@ -10,22 +12,19 @@
 
 ## Установка
 
-2. Установите зависимости:
+2. Зависимости:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Запуск (локально)
+## Запуск 
 
 Запуск в режиме разработки:
 
 ```bash
 uvicorn app.main:app --reload
 ```
-
-Главная страница: `http://localhost:8000`
-Панель администратора: `http://localhost:8000/admin`
 
 ## Docker
 
@@ -40,6 +39,9 @@ docker build -t news-portal .
 ```bash
 docker run -p 8000:8000 news-portal
 ```
+Главная страница: `http://localhost:8000`
+Панель администратора: `http://localhost:8000/admin`
+
 
 <img width="915" height="940" alt="image" src="https://github.com/user-attachments/assets/2b6a74f4-1b09-4675-9fdf-f671aea995f0" />
 <img width="552" height="327" alt="image" src="https://github.com/user-attachments/assets/5be76a57-5a10-404c-99e5-83cccf4a6c19" />
@@ -48,7 +50,7 @@ docker run -p 8000:8000 news-portal
 ## Использование
 
 - Главная страница — просмотр всех новостей
-- Панель администратора — включение/выключение авто-обновления, ручное добавление новостей
+- Панель администратора — включение/выключение парсинга, ручное добавление новостей
 
 
 ## Список источников (app/parser.py)
